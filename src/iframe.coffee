@@ -1,4 +1,5 @@
 Base = require './base'
+uuid = require 'uuid'
 
 class IframeRuntime extends Base
   constructor: (definition) ->
@@ -83,12 +84,13 @@ class IframeRuntime extends Base
 
     @flush()
 
-  send: (protocol, command, payload) ->
+  send: (protocol, command, payload, id) ->
     if @connecting
       @buffer.push
         protocol: protocol
         command: command
         payload: payload
+        id: id or uuid.v4()
       return
 
     w = @iframe.contentWindow

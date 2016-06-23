@@ -1,4 +1,5 @@
 Base = require './base'
+uuid = require 'uuid'
 
 class WebRTCRuntime extends Base
   constructor: (definition) ->
@@ -81,11 +82,12 @@ class WebRTCRuntime extends Base
     @connection = null
     @emit 'disconnected'
 
-  send: (protocol, command, payload) ->
+  send: (protocol, command, payload, id) ->
     m =
       protocol: protocol
       command: command
       payload: payload
+      id: id or uuid.v4()
     if @connecting
       @buffer.push m
       return

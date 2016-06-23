@@ -1,5 +1,6 @@
 Base = require './base'
 microflo = require 'microflo'
+uuid = require 'uuid'
 
 parseQueryString = (queryString) ->
   queries = queryString.split "&"
@@ -150,11 +151,12 @@ class MicroFloRuntime extends Base
     # Set an ID for targeting purposes
     @container.id = 'preview-container'
 
-  send: (protocol, command, payload) ->
+  send: (protocol, command, payload, id) ->
     msg =
         protocol: protocol
         command: command
         payload: payload
+        id: id or uuid.v4()
     if @connecting
       @buffer.push msg
       return

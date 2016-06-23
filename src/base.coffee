@@ -103,6 +103,6 @@ class BaseRuntime extends platform.EventEmitter
     payload.secret = @definition.secret
     @send 'component', command, payload
 
-  send: (protocol, command, payload) ->
+  send: (protocol, command, payload, id) ->
 
 module.exports = BaseRuntime

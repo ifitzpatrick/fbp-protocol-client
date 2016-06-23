@@ -1,5 +1,6 @@
 Base = require './base'
 platform = require '../helpers/platform'
+uuid = require 'uuid'
 
 class WebSocketRuntime extends Base
   constructor: (definition) ->
@@ -76,12 +77,13 @@ class WebSocketRuntime extends Base
     @connecting = false
     @connection.close()
 
-  send: (protocol, command, payload) ->
+  send: (protocol, command, payload, id) ->
     if @connecting
       @buffer.push
         protocol: protocol
         command: command
         payload: payload
+        id: id or uuid.v4()
       return
 
     return unless @connection
