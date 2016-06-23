@@ -169,10 +169,10 @@ class MicroFloRuntime extends Base
 
   onMessage: (message) =>
     switch message.data.protocol
-      when 'runtime' then @recvRuntime message.data.command, message.data.payload
-      when 'graph' then @recvGraph message.data.command, message.data.payload
-      when 'network' then @recvNetwork message.data.command, message.data.payload
-      when 'component' then @recvComponent message.data.command, message.data.payload
+      when 'runtime' then @recvRuntime message.data.command, message.data.payload, message.data.id
+      when 'graph' then @recvGraph message.data.command, message.data.payload, message.data.id
+      when 'network' then @recvNetwork message.data.command, message.data.payload, message.data.id
+      when 'component' then @recvComponent message.data.command, message.data.payload, message.data.id
 
   flush: ->
     for item in @buffer

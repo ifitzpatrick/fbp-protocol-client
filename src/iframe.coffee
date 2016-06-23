@@ -119,10 +119,10 @@ class IframeRuntime extends Base
     else
       data = message.data
     switch data.protocol
-      when 'runtime' then @recvRuntime data.command, data.payload
-      when 'graph' then @recvGraph data.command, data.payload
-      when 'network' then @recvNetwork data.command, data.payload
-      when 'component' then @recvComponent data.command, data.payload
+      when 'runtime' then @recvRuntime data.command, data.payload, data.id
+      when 'graph' then @recvGraph data.command, data.payload, data.id
+      when 'network' then @recvNetwork data.command, data.payload, data.id
+      when 'component' then @recvComponent data.command, data.payload, data.id
 
   flush: ->
     for item in @buffer

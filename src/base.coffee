@@ -64,10 +64,11 @@ class BaseRuntime extends platform.EventEmitter
           command: command
           payload: payload
 
-  recvGraph: (command, payload) ->
+  recvGraph: (command, payload, id) ->
     @emit 'graph',
       command: command
       payload: payload
+      id: id
 
   recvNetwork: (command, payload) ->
     switch command
