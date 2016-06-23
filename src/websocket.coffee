@@ -78,12 +78,14 @@ class WebSocketRuntime extends Base
     @connection.close()
 
   send: (protocol, command, payload, id) ->
+    id ?= uuid.v4()
+
     if @connecting
       @buffer.push
         protocol: protocol
         command: command
         payload: payload
-        id: id or uuid.v4()
+        id: id
       return
 
     return unless @connection
@@ -91,6 +93,7 @@ class WebSocketRuntime extends Base
       protocol: protocol
       command: command
       payload: payload
+      id: id
 
   handleError: (error) =>
     if @protocol is 'noflo'

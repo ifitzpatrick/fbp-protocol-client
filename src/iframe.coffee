@@ -85,12 +85,13 @@ class IframeRuntime extends Base
     @flush()
 
   send: (protocol, command, payload, id) ->
+    id ?= uuid.v4()
     if @connecting
       @buffer.push
         protocol: protocol
         command: command
         payload: payload
-        id: id or uuid.v4()
+        id: id
       return
 
     w = @iframe.contentWindow
@@ -105,12 +106,14 @@ class IframeRuntime extends Base
         protocol: protocol
         command: command
         payload: payload
+        id: id
       ), '*'
       return
     w.postMessage JSON.stringify(
       protocol: protocol
       command: command
       payload: payload
+      id: id
     ), w.location.href
 
   onMessage: (message) =>
